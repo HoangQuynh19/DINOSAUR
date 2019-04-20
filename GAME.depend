@@ -1,0 +1,90 @@
+# depslib dependency file v1.0
+1554610091 source:e:\ltnc\project\game\loadtexture.cpp
+	"loadTexture.h"
+
+1554607639 e:\ltnc\project\game\loadtexture.h
+	<SDL.h>
+	<SDL_image.h>
+	<string>
+
+1554611261 source:e:\ltnc\project\game\main.cpp
+	"Object.h"
+
+1554610410 e:\ltnc\project\game\object.h
+	"loadTexture.h"
+
+1554610329 source:e:\ltnc\project\game\object.cpp
+	"Object.h"
+
+1554602592 source:e:\ltnc\project\game\general.cpp
+	"General.h"
+
+1554602592 e:\ltnc\project\game\general.h
+	"Object.h"
+
+1555142657 source:c:\users\dell\my_program\game\loadtexture.cpp
+	"loadTexture.h"
+
+1555139173 c:\users\dell\my_program\game\loadtexture.h
+	<SDL.h>
+	<SDL_image.h>
+	<string>
+
+1555143690 source:c:\users\dell\my_program\game\main.cpp
+	"Object.h"
+	"Barrier.h"
+	"GameOver.h"
+
+1555139719 c:\users\dell\my_program\game\object.h
+	"loadTexture.h"
+
+1555142657 source:c:\users\dell\my_program\game\object.cpp
+	"Object.h"
+
+1555139173 c:\users\dell\my_program\game\barrier.h
+	"loadTexture.h"
+
+1555142657 source:c:\users\dell\my_program\game\barrier.cpp
+	"Barrier.h"
+
+1555143449 source:c:\users\dell\my_program\game\gameover.cpp
+	"GameOver.h"
+
+1555142908 c:\users\dell\my_program\game\gameover.h
+	"loadTexture.h"
+	"Object.h"
+	"Barrier.h"
+
+1555683278 source:f:\my_program-master\game\barrier.cpp
+	"Barrier.h"
+
+1555143868 f:\my_program-master\game\barrier.h
+	"loadTexture.h"
+
+1555143868 f:\my_program-master\game\loadtexture.h
+	<SDL.h>
+	<SDL_image.h>
+	<string>
+
+1555752063 source:f:\my_program-master\game\gameover.cpp
+	"GameOver.h"
+
+1555751860 f:\my_program-master\game\gameover.h
+	"loadTexture.h"
+	"Object.h"
+	"Barrier.h"
+
+1555750791 f:\my_program-master\game\object.h
+	"loadTexture.h"
+
+1555143868 source:f:\my_program-master\game\loadtexture.cpp
+	"loadTexture.h"
+
+1555752023 source:f:\my_program-master\game\main.cpp
+	"Object.h"
+	"Barrier.h"
+	"GameOver.h"
+
+1555750894 source:f:\my_program-master\game\object.cpp
+	"Object.h"
+
