@@ -1,196 +1,100 @@
-#include "Object.h"
-#include "Barrier.h"
+#include "Dino.h"
+#include "Obstacle.h"
+#include "Synthesis.h"
+#include "Texture.h"
 #include "GameOver.h"
-
-SDL_Renderer* gRenderer=NULL;
-SDL_Window* gWindow=NULL;
-
-const char WINDOW_TITLE[]="DINOSAUR";
-
-const int POSY_BEGIN_CACTUS = 300;
-
-LTexture gBackground;
-LTexture gDino;
-LTexture gCactus;
-
-LTexture gPlay;
-LTexture gameOver;
-
-Dino Dino;
-#define PosX_Cactus2 1550
-
-
-Barrier Cactus1(SCREEN_WIDTH,POSY_BEGIN_CACTUS);
-Barrier Cactus2(PosX_Cactus2,POSY_BEGIN_CACTUS);
-
-
-
-const int RUNNING_ANIMATION_FRAMES = 4;
-SDL_Rect gDinoClips[ RUNNING_ANIMATION_FRAMES ];
-
-bool init();
-void close();
-
-bool loadMedia()
-{
-	bool success = true;
-
-	if (gBackground.loadTexture("background.jpg",gRenderer) == NULL ) success = false;
-
-    if (gCactus.loadTexture("barrier1.gif",gRenderer) == NULL ) success = false ;
-
-    if (gDino.loadTexture("dino.png",gRenderer) == NULL ) success = false;
-    else
-    {
-       //Set sprite clips
-		gDinoClips[ 0 ].x =   0;
-		gDinoClips[ 0 ].y =   0;
-		gDinoClips[ 0 ].w =  123;
-		gDinoClips[ 0 ].h = 80;
-
-		gDinoClips[ 1 ].x =  140;
-		gDinoClips[ 1 ].y =   0;
-		gDinoClips[ 1 ].w =  128;
-		gDinoClips[ 1 ].h = 80;
-
-		gDinoClips[ 2 ].x = 282;
-		gDinoClips[ 2 ].y =   0;
-		gDinoClips[ 2 ].w =  145;
-		gDinoClips[ 2 ].h = 80;
-
-		gDinoClips[ 3 ].x = 437;
-		gDinoClips[ 3 ].y =   0;
-		gDinoClips[ 3 ].w =  128;
-		gDinoClips[ 3 ].h = 80;
-	}
-
-    if (gPlay.loadTexture("Play.png",gRenderer) == NULL ) success = false;
-
-
-	return success;
-}
-
-void Render(int& scrollingOffset,int& frame)
-{
-    --scrollingOffset;
-    if( scrollingOffset < -gBackground.getWidth() )
-    {
-        scrollingOffset = 0;
-    }
-
-    gBackground.render( scrollingOffset, 0,gRenderer,NULL );
-    gBackground.render( scrollingOffset + gBackground.getWidth(), 0 ,gRenderer,NULL );
-
-    gPlay.render( ( SCREEN_WIDTH-gPlay.getWidth() )/2 ,( SCREEN_HEIGHT-gPlay.getHeight() ) /2 , gRenderer,NULL );
-
-
-
-    Cactus1.Render( gCactus,gRenderer );
-    Cactus2.Render( gCactus,gRenderer );
-
-    Dino.Render( gDino,gRenderer,gDinoClips,frame );
-
-
-}
 
 int main(int argc, char* args[])
 {
-    if( !init() ) return -1;
+    SDL_Renderer* Renderer=NULL;
+    SDL_Window* Window=NULL;
 
-  //  bool PlayAgain = true;
+    Texture Background;
+    Texture DINO;
+    Texture Cactus;
+    Texture Play;
+    Texture gameOver;
 
- //   while(PlayAgain)
-  //  {
-        if( !loadMedia() ) return -1;
+    int Running_Animation_Frames=4;
+    SDL_Rect DinoClips[ Running_Animation_Frames ];
 
-        SDL_Event e;
-        bool quit=false;
+   // bool PlayAgain = false;
+    bool quit=false;
+
+    int POSY_BEGIN_CACTUS = 300;
+
+    if( !init(Renderer,Window,SCREEN_WIDTH,SCREEN_HEIGHT) ) return -1;
+
+    SDL_Event e;
+
+   // while(!PlayAgain)
+   // {
+        if( !loadMedia( Background, DINO, Cactus, Play, gameOver, DinoClips, Renderer ) ) return -1;
+
+        Dino Dinosaur;
+
+        Obstacle Cactus1(SCREEN_WIDTH,POSY_BEGIN_CACTUS);
+        Obstacle Cactus2(SCREEN_WIDTH+SCREEN_WIDTH/2,POSY_BEGIN_CACTUS);
 
         int scrollingOffset = 0;
         int frame = 0;
-
+        bool press=false;
         while(!quit)
         {
-            bool press=false;
+
             while(SDL_PollEvent(&e)!=0)
             {
-                if( e.type == SDL_QUIT )
+                if( e.type == SDL_QUIT ) quit = true;
+
+                if( e.type == SDL_KEYDOWN )
                 {
-                    quit = true;
-
-                }
-                Cactus1.handleEvent(gPlay,e);
-                Cactus2.handleEvent(gPlay,e);
-
-                press=GameOver(e,Dino, Cactus1,Cactus2,gRenderer,gameOver);
-
-                Dino.handleEvent(e,press);
-            }
-            Cactus1.move(gCactus);
-            Cactus2.move(gCactus);
-
-            Dino.jump();
-
-            SDL_RenderClear( gRenderer );
-
-            Render(scrollingOffset,frame);
-
-            /*PlayAgain=*/GameOver(e,Dino, Cactus1,Cactus2,gRenderer,gameOver);
-
-            SDL_RenderPresent( gRenderer );
-
-            ++frame;
-
-                    if( frame / 4 >= RUNNING_ANIMATION_FRAMES )
+                    switch( e.key.keysym.sym )
                     {
-                        frame = 0;
+                        case SDLK_p:{ Play.free();break;}
+                       // case SDLK_y:{PlayAgain=true;break;}
+                       // case SDLK_n:{PlayAgain=false;quit=true;}
                     }
+                }
+                Cactus1.handleEvent(e);
+                Cactus2.handleEvent(e);
+
+
+
+                Dinosaur.handleEvent(e,press);
+            }
+            Cactus1.move(Cactus);
+            Cactus2.move(Cactus);
+
+            Dinosaur.jump(frame);
+
+            SDL_RenderClear( Renderer );
+
+            press=GameOver(e, Dinosaur,Cactus1,Cactus2,Renderer,gameOver);
+
+            RENDER(Background, DINO, Cactus, Play,gameOver, Dinosaur,Cactus1, Cactus2, DinoClips, scrollingOffset, frame,Renderer,press);
+            //Update Screen
+            SDL_RenderPresent( Renderer );
+            //
+            if(press==false){
+                ++frame;
+                if( frame / Running_Animation_Frames >= Running_Animation_Frames )
+                {
+                    frame = 0;
+                }
+            }
 
         }
    // }
 
-    close();
+
+    Background.free();
+    DINO.free();
+    Cactus.free();
+    Play.free();
+    gameOver.free();
+
+    close(Renderer,Window);
     return 0;
 }
 
-bool init(){
-    bool success = true;
-    if( SDL_Init(SDL_INIT_VIDEO)<0 ) success = false;
-	else{
-		if( !SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "1" ) ){
-			printf( "Warning: Linear texture filtering not enabled!" );
-		}
-		gWindow = SDL_CreateWindow( WINDOW_TITLE, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
-		if( gWindow == NULL ){
-			success = false;
-		} else{
-			gRenderer = SDL_CreateRenderer( gWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC );
-			if(gRenderer == NULL) success = false;
-			else{
-				SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
 
-				int imgFlags = IMG_INIT_PNG;
-				if( !( IMG_Init( imgFlags ) & imgFlags ) ){
-					success = false;
-				}
-			}
-		}
-	}
-
-	return success;
-}
-void close()
-{
-    gBackground.free();
-    gDino.free();
-    gCactus.free();
-    gPlay.free();
-
-	SDL_DestroyRenderer( gRenderer );
-	SDL_DestroyWindow( gWindow );
-	gWindow = NULL;
-	gRenderer = NULL;
-
-	IMG_Quit();
-	SDL_Quit();
-}

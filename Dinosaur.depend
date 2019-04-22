@@ -1,0 +1,44 @@
+# depslib dependency file v1.0
+1555758515 source:f:\dinosaur\texture.cpp
+	"Texture.h"
+
+1555814824 f:\dinosaur\texture.h
+	<SDL.h>
+	<SDL_image.h>
+	<string>
+
+1555821175 source:f:\dinosaur\dino.cpp
+	"Dino.h"
+
+1555821034 f:\dinosaur\dino.h
+	"Texture.h"
+
+1555821237 source:f:\dinosaur\obstacle.cpp
+	"Obstacle.h"
+
+1555814557 f:\dinosaur\obstacle.h
+	"Texture.h"
+
+1555822063 source:f:\dinosaur\main.cpp
+	"Dino.h"
+	"Obstacle.h"
+	"Synthesis.h"
+	"Texture.h"
+	"GameOver.h"
+
+1555822030 source:f:\dinosaur\synthesis.cpp
+	"Synthesis.h"
+
+1555822018 f:\dinosaur\synthesis.h
+	"Texture.h"
+	"Dino.h"
+	"Obstacle.h"
+
+1555821908 source:f:\dinosaur\gameover.cpp
+	"GameOver.h"
+
+1555930937 f:\dinosaur\gameover.h
+	"Texture.h"
+	"Obstacle.h"
+	"Dino.h"
+

@@ -1,19 +1,15 @@
 #ifndef GAMEOVER_H_
 #define GAMEOVER_H_
 
-#include "loadTexture.h"
-#include "Object.h"
-#include "Barrier.h"
+#include "Texture.h"
+#include "Obstacle.h"
+#include "Dino.h"
 
+#define Lim_left 112
+#define Lim_right 50
+#define Lim_above 290
 
-#define limit_left_C 115
-#define limit_right_C 50
-#define limit_above_C 290
-
-
-#define distanceCactus 550
-bool GameOver(SDL_Event&e,Dino& Dino, Barrier & Cactus1,Barrier & Cactus2
-               ,SDL_Renderer*gRenderer,LTexture& gameOver );
+bool GameOver(SDL_Event&e, Dino& Dino, Obstacle & Cactus1,Obstacle & Cactus2,
+               SDL_Renderer* &Renderer, Texture& gameOver );
 
 #endif // GAMEOVER_H_
-
