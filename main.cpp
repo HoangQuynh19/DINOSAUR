@@ -18,7 +18,6 @@ int main(int argc, char* args[])
     int Running_Animation_Frames=4;
     SDL_Rect DinoClips[ Running_Animation_Frames ];
 
-   // bool PlayAgain = false;
     bool quit=false;
 
     int POSY_BEGIN_CACTUS = 300;
@@ -53,6 +52,7 @@ int main(int argc, char* args[])
                         case SDLK_p:{ Play.free();break;}
                        // case SDLK_y:{PlayAgain=true;break;}
                        // case SDLK_n:{PlayAgain=false;quit=true;}
+
                     }
                 }
                 Cactus1.handleEvent(e);

@@ -4,7 +4,7 @@ bool GameOver(SDL_Event&e,Dino& Dino, Obstacle& Cactus1,Obstacle& Cactus2,
                SDL_Renderer* &Renderer,Texture& gameOver)
 {
     bool end=false;
-   // bool PlayAgain=true;
+
     int Distance_left1 = Cactus1.getPosX()-Dino.getPosX();
     int Distance_right1 = Dino.getPosX()- Cactus1.getPosX();
 
@@ -33,6 +33,7 @@ bool GameOver(SDL_Event&e,Dino& Dino, Obstacle& Cactus1,Obstacle& Cactus2,
         Cactus1.End(x);
         Cactus2.End(x+SCREEN_WIDTH/2);
         Dino.End(y);
+
         end=true;
     }
 
@@ -45,7 +46,7 @@ bool GameOver(SDL_Event&e,Dino& Dino, Obstacle& Cactus1,Obstacle& Cactus2,
         Cactus1.End(x-SCREEN_WIDTH/2);
         Dino.End(y);
 
-         end=true;
+        end=true;
     }
     if ( Distance_right2 <= Lim_right && Dino.getPosy() > Lim_above && Cactus2.getPosX()< Dino.getPosX())
     {
@@ -58,28 +59,5 @@ bool GameOver(SDL_Event&e,Dino& Dino, Obstacle& Cactus1,Obstacle& Cactus2,
 
         end=true;
     }
-
-    if (end == true)
-    {
-
-
-  /*  if( e.type == SDL_KEYDOWN  )
-        {
-            switch( e.key.keysym.sym )
-            {
-                case SDLK_y:
-                    {
-                        PlayAgain=true;
-                        break;
-                    }
-                case SDLK_n:
-                    {
-                        PlayAgain=false;
-                        break;
-                    }
-            }
-        }*/
-    }
-
     return end;
 }

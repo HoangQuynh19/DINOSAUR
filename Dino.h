@@ -2,6 +2,7 @@
 #define DINO_H_
 
 #include "Texture.h"
+#include <SDL_mixer.h>
 
 #define HEIGHT 20
 #define GLAVITY 1
@@ -12,9 +13,11 @@ private:
     int PosX,PosY;
     int Altitude;
     int Gravity;
+    Mix_Chunk* Sound_jump;
 public:
     static const int POSX_BEGIN_DINO = 120;
     static const int POSY_BEGIN_DINO = 345;
+
     Dino();
     void handleEvent( SDL_Event&e, bool& press );
 
@@ -25,6 +28,7 @@ public:
     int getPosX();
     int getPosy();
     void End(int y);
+
 };
 
 #endif // DINO_H

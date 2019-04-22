@@ -18,8 +18,8 @@ void Obstacle::handleEvent( SDL_Event& e)
         {
             case SDLK_p:
             {
-            VelX -= VELX_C;
-            break;
+                VelX -= VELX_C;
+                break;
             }
         }
     }
@@ -29,8 +29,8 @@ void Obstacle::handleEvent( SDL_Event& e)
         {
             case SDLK_p:
             {
-             VELX_C=0;
-            break;
+                VELX_C=0;
+                break;
             }
         }
     }
@@ -47,9 +47,7 @@ void Obstacle::move(Texture& Texture)
 }
 void Obstacle::Render(Texture& Texture,SDL_Renderer* Renderer)
 {
-
    Texture.render(PosX,PosY,Renderer,NULL);
- //  Play.render((SCREEN_WIDTH-Play.getWidth())/2, (SCREEN_HEIGHT-Play.getHeight())/2,Renderer,NULL);
 }
 int Obstacle::getPosX()
 {

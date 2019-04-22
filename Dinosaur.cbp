@@ -33,6 +33,8 @@
 		</Compiler>
 		<Unit filename="Dino.cpp" />
 		<Unit filename="Dino.h" />
+		<Unit filename="GameOver.cpp" />
+		<Unit filename="GameOver.h" />
 		<Unit filename="Main.cpp" />
 		<Unit filename="Obstacle.cpp" />
 		<Unit filename="Obstacle.h" />

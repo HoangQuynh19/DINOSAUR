@@ -21,6 +21,11 @@ bool init( SDL_Renderer* &Renderer , SDL_Window* &Window , const int SCREEN_WIDT
 				if( !( IMG_Init( imgFlags ) & imgFlags ) ){
 					success = false;
 				}
+				if( Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 )
+				{
+					printf( "SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError() );
+					success = false;
+				}
 			}
 		}
 	}
@@ -79,12 +84,12 @@ void RENDER(Texture& Background, Texture& DINO, Texture& Cactus, Texture& Play,T
                SDL_Rect DinoClips[RUNNING_ANIMATION_FRAMES],int& scrollingOffset, int& frame, SDL_Renderer* &Renderer,bool &press)
 {
     if(press==false){
-    scrollingOffset-=3;
+        scrollingOffset-=3;
 
-    if( scrollingOffset < -Background.getWidth() )
-    {
-        scrollingOffset = 0;
-    }
+        if( scrollingOffset < -Background.getWidth() )
+        {
+            scrollingOffset = 0;
+        }
     }
 
     Background.render( scrollingOffset, 0,Renderer,NULL );
@@ -96,8 +101,9 @@ void RENDER(Texture& Background, Texture& DINO, Texture& Cactus, Texture& Play,T
     Cactus2.Render( Cactus,Renderer );
 
     Dinosaur.Render( DINO,Renderer,DinoClips,frame );
+
     if(press==true){
-    gameOver.render( ( SCREEN_WIDTH-gameOver.getWidth() )/2 ,( SCREEN_HEIGHT-gameOver.getHeight() ) /2 , Renderer,NULL );
+        gameOver.render( ( SCREEN_WIDTH-gameOver.getWidth() )/2 ,( SCREEN_HEIGHT-gameOver.getHeight() ) /2 , Renderer,NULL );
     }
 
 }

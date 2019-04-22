@@ -6,6 +6,8 @@ Dino::Dino()
     PosY=POSY_BEGIN_DINO;
     Altitude=0;
     Gravity=0;
+    Sound_jump = Mix_LoadWAV( "medium.wav" );
+
 }
 void Dino::handleEvent(SDL_Event& e, bool& press)
 {
@@ -17,6 +19,7 @@ void Dino::handleEvent(SDL_Event& e, bool& press)
             {
                 case SDLK_SPACE:
                     {
+                        Mix_PlayChannel( -1, Sound_jump, 0 );
                         Altitude=HEIGHT;
                         Gravity=GLAVITY;
                         break;
@@ -60,5 +63,6 @@ void Dino::End(int y)
     PosY=POSY_BEGIN_DINO;
     Altitude=0;
     Gravity=0;
+    Mix_FreeChunk(Sound_jump );
+    Sound_jump=NULL;
 }
-
